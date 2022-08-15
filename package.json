@@ -1,5 +1,5 @@
 {
-  "name": "input-manager-monorepo",
+  "name": "gamepad-debug-ui-monorepo",
   "version": "0.0.0",
   "main": "index.js",
   "authors": [
@@ -11,11 +11,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspace input-manager-docs dev",
-    "build": "yarn workspace input-map build",
+    "dev": "yarn workspace gamepad-debug-ui-demo dev",
+    "build": "yarn workspace gamepad-debug-ui build",
     "prettier": "prettier -l \"./packages/**/*.{js,jsx,ts,tsx,md}\" --write",
     "commit": "git-cz",
-    "release": "yarn workspace input-map release"
+    "release": "yarn workspace gamepad-debug-ui release"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

@@ -17,11 +17,11 @@ There's a NextJS website under `packages/docs` to be a playground to develop and
 
 1. `yarn build`
 
-This runs the `tsup` process for one package/module. Check the `package.json` and `packages/input-manager/package.json` for more info.
+This runs the `tsup` process for one package/module. Check the `package.json` and `packages/gamepad-debug-ui/package.json` for more info.
 
 ## Adding packages
 
-1. Rename the `packages/input-manager` folder to your package/module name.
+1. Rename the `packages/gamepad-debug-ui` folder to your package/module name.
 1. Edit the `packages/your-new-pkg/package.json` and change the package/module name (as well as other details - like author).
 1. Edit the root `package.json` and change the `build` and `release` scripts to reference your new package/module name (you can also just find/replace across all files)
 
