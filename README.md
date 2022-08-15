@@ -1,31 +1,27 @@
-# React Typescript Monorepo
+# React Gamepad Debug UI
 
-Starter template for React / Typescript libraries using tsup and Yarn workspaces.
+Debug UI components (e.g. `<DebugGamepad />`) for displaying gamepad input in your React apps.
 
-This is setup with a Semantic Release workflow based off Conventional Commits. And it's automatically released to Github and NPM using Github Actions.
+Uses [joymap](https://github.com/diegodoumecq/joymap) under the hood to get gamepad input from browser Gamepad API.
 
 ## Development
 
-There's a NextJS website under `packages/docs` to be a playground to develop and test the library.
+There's a Vite website under `packages/demo` to be a playground to develop and test the library.
 
-1. Fork/clone this repo: `https://github.com/whoisryosuke/react-typescript-monorepo-2022.git`
+1. Fork/clone this repo: `https://github.com/whoisryosuke/react-gamepad-debug-ui.git`
 1. Install dependencies: `yarn`
 1. Build the library: `yarn build`
-1. Start the NextJS playground: `yarn dev`
+1. Start the playground: `yarn dev`
 
 ## Building package
 
 1. `yarn build`
 
-This runs the `tsup` process for one package/module. Check the `package.json` and `packages/gamepad-debug-ui/package.json` for more info.
-
-## Adding packages
-
-1. Rename the `packages/gamepad-debug-ui` folder to your package/module name.
-1. Edit the `packages/your-new-pkg/package.json` and change the package/module name (as well as other details - like author).
-1. Edit the root `package.json` and change the `build` and `release` scripts to reference your new package/module name (you can also just find/replace across all files)
+This runs the `parcel` process for one package/module. Check the `package.json` and `packages/gamepad-debug-ui/package.json` for more info.
 
 ## Release to Github/NPM
+
+This is setup with a Semantic Release workflow based off Conventional Commits. And it's automatically released to Github and NPM using Github Actions.
 
 This repo should automatically release to Github and tag the release when you commit to `main`, `alpha`, or `beta` branches (change these in `package.json`).
 
