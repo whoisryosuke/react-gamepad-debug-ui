@@ -1,4 +1,4 @@
 import Gamepad from "./components/Gamepad"
-import { gamepads, joymap } from "./utils/gamepad"
+import { GamepadsProvider } from "./context/GamepadContext"
 
-export { Gamepad, gamepads, joymap }
+export { Gamepad, GamepadsProvider }
