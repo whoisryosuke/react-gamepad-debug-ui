@@ -41,7 +41,7 @@ type Props = {
   analogRightHorizontal: number;
 }
 
-const Gamepad = ({ scale = 0.5, square,
+const Dualshock4 = ({ scale = 0.5, square,
 triangle,
 cross,
 circle,
@@ -151,4 +151,4 @@ analogRightHorizontal,
   )
 }
 
-export default Gamepad
+export default Dualshock4

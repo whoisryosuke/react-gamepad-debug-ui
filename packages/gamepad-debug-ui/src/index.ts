@@ -1,4 +1,4 @@
-import Gamepad from "./components/Gamepad"
+import Gamepad from "./components/Dualshock4"
 
 export {
     Gamepad
