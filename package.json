@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "yarn workspace gamepad-debug-ui-demo dev",
     "build": "yarn workspace gamepad-debug-ui build",
+    "watch": "yarn workspace gamepad-debug-ui watch",
     "prettier": "prettier -l \"./packages/**/*.{js,jsx,ts,tsx,md}\" --write",
     "commit": "git-cz",
     "release": "yarn workspace gamepad-debug-ui release"
