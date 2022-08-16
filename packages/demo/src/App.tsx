@@ -7,8 +7,8 @@ const App = (props: Props) => {
   return (
     <GamepadsProvider>
     <div>
-      <h1>App</h1>
-      <Gamepad />
+      <h1>Gamepad Debug UI</h1>
+      <Gamepad scale={1} />
     </div>
     </GamepadsProvider>
   )

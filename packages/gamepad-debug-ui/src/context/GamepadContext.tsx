@@ -8,7 +8,12 @@ import React, {
   useState,
 } from 'react';
 
-const GamepadsContext = createContext({});
+interface GamepadContextData {
+  gamepads?: Record<number, Gamepad>;
+  setGamepads?: React.Dispatch<React.SetStateAction<Gamepad[]>>;
+}
+
+const GamepadsContext = createContext<GamepadContextData>({});
 
 interface GamepadsProviderProps {
 }
@@ -20,7 +25,7 @@ export const GamepadsProvider = ({ children }: PropsWithChildren<GamepadsProvide
   var haveEvents = 'ongamepadconnected' in window;
 
   const addGamepad = useCallback(
-    gamepad => {
+    (gamepad: Gamepad) => {
       setGamepads({
         ...gamepads,
         [gamepad.index]: {
@@ -51,7 +56,9 @@ export const GamepadsProvider = ({ children }: PropsWithChildren<GamepadsProvide
     // Grab gamepads from browser API
     var detectedGamepads = navigator.getGamepads
       ? navigator.getGamepads()
+      // @ts-ignore
       : navigator.webkitGetGamepads
+      // @ts-ignore
       ? navigator.webkitGetGamepads()
       : [];
 

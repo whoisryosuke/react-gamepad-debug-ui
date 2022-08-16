@@ -1,27 +1,24 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React from "react"
 import { useGamepads } from "../context/GamepadContext";
-import useLoop from "../hooks/useLoop";
-import { useGamepadStore } from "../store/store";
+import { GamepadTypes } from "../types";
 import Dualshock4 from "./Dualshock4";
 
-// We create a map between the Input Map and the Gamepad inputs
-// e.g. Jump might be "x" on PS4 controller - or an ID like 13
-const GAMEPAD_MAP = {
-  start: "Jump",
-  dpadUp: "MoveUp",
-  dpadDown: "MoveDown"
+const GAMEPAD_TYPES: Record<GamepadTypes, React.ComponentType> = {
+  'dualshock4': Dualshock4,
+  'xboxone': Dualshock4,
 }
-type GamepadButtons = keyof typeof GAMEPAD_MAP; 
-type ButtonState = Record<GamepadButtons, boolean>; 
 
-type Props = {}
+type Props = {
+  type: GamepadTypes
+  scale: number
+}
 
-const Gamepad = ({ maxGamepads = 4 }: Props) => {
+const Gamepad = ({ type = 'dualshock4', scale }: Props) => {
   const {gamepads} = useGamepads();
 
   // console.log('[GAMEPAD] Buttons?', gamepads)
 
-  const currentGamepad = 1 in gamepads ? gamepads[1] : false; 
+  const currentGamepad = gamepads && 1 in gamepads ? gamepads[1] : false; 
 
   if(currentGamepad) {
 
@@ -30,11 +27,27 @@ const Gamepad = ({ maxGamepads = 4 }: Props) => {
       circle: currentGamepad.buttons[1].pressed,
       square: currentGamepad.buttons[2].pressed,
       triangle: currentGamepad.buttons[3].pressed,
+      l1: currentGamepad.buttons[4].pressed,
+      r1: currentGamepad.buttons[5].pressed,
+      l2: currentGamepad.buttons[6].pressed,
+      r2: currentGamepad.buttons[7].pressed,
+      share: currentGamepad.buttons[8].pressed,
+      option: currentGamepad.buttons[9].pressed,
+      l3: currentGamepad.buttons[10].pressed,
+      r3: currentGamepad.buttons[11].pressed,
+      up: currentGamepad.buttons[12].pressed,
+      down: currentGamepad.buttons[13].pressed,
+      left: currentGamepad.buttons[14].pressed,
+      right: currentGamepad.buttons[15].pressed,
       analogLeftHorizontal: currentGamepad.axes[0],
       analogLeftVertical: currentGamepad.axes[1],
+      analogRightHorizontal: currentGamepad.axes[2],
+      analogRightVertical: currentGamepad.axes[3],
     }
 
-    return <Dualshock4 {...buttonProps} />
+    const CurrentGamepad = GAMEPAD_TYPES[type];
+
+    return <CurrentGamepad {...buttonProps} scale={scale} />
   }
   return <div>No gamepads detected</div>
 

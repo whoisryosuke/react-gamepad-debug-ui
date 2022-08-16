@@ -1,0 +1,1 @@
+export type GamepadTypes = 'dualshock4' | 'dualsense' | 'xboxone'

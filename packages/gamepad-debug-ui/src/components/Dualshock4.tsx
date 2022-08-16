@@ -4,6 +4,10 @@ import TRIANGLE from "../../assets/gamepads/dualshock4/TRIANGLE.png"
 import SQUARE from "../../assets/gamepads/dualshock4/SQUARE.png"
 import CIRCLE from "../../assets/gamepads/dualshock4/CIRCLE.png"
 import CROSS from "../../assets/gamepads/dualshock4/CROSS.png"
+import L1 from "../../assets/gamepads/dualshock4/L1.png"
+import L2 from "../../assets/gamepads/dualshock4/L2.png"
+import R1 from "../../assets/gamepads/dualshock4/R1.png"
+import R2 from "../../assets/gamepads/dualshock4/R2.png"
 import ANALOG_LEFT from "../../assets/gamepads/dualshock4/ANALOG_LEFT.png"
 import ANALOG_RIGHT from "../../assets/gamepads/dualshock4/ANALOG_RIGHT.png"
 import HOME from "../../assets/gamepads/dualshock4/HOME.png"
@@ -22,6 +26,12 @@ type Props = {
   cross: boolean
   circle: boolean
 
+  // Triggers
+  l1: boolean
+  l2: boolean
+  r1: boolean
+  r2: boolean
+
   // Middle buttons
   share: boolean
   options: boolean
@@ -39,6 +49,8 @@ type Props = {
   analogLeftHorizontal: number
   analogRightVertical: number
   analogRightHorizontal: number
+  l3: boolean
+  r3: boolean
 }
 
 const Dualshock4 = ({
@@ -47,6 +59,10 @@ const Dualshock4 = ({
   triangle,
   cross,
   circle,
+  l1,
+  l2,
+  r1,
+  r2,
   share,
   options,
   home,
@@ -57,11 +73,18 @@ const Dualshock4 = ({
   analogLeftVertical,
   analogLeftHorizontal,
   analogRightVertical,
-  analogRightHorizontal
+  analogRightHorizontal,
+  l3,
+  r3
 }: Props) => {
   return (
-    <div style={{ position: "relative", width: "585px", height: "368px", transform: `scale(${scale})`, transformOrigin: "top left" }}>
-      <img src={GamepadBG} />
+    <div style={{ position: "relative", width: "585px", height: "437px", transform: `scale(${scale})`, transformOrigin: "top left" }}>
+      <img src={GamepadBG}
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+        }} />
 
       {/* Face buttons */}
       <img
@@ -69,7 +92,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 455,
-          top: 46,
+          top: 116,
           opacity: triangle ? "0.5" : "1"
         }}
       />
@@ -78,7 +101,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 412,
-          top: 89,
+          top: 159,
           opacity: square ? "0.5" : "1"
         }}
       />
@@ -87,7 +110,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 498,
-          top: 89,
+          top: 159,
           opacity: circle ? "0.5" : "1"
         }}
       />
@@ -96,7 +119,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 455,
-          top: 133,
+          top: 203,
           opacity: cross ? "0.5" : "1"
         }}
       />
@@ -107,7 +130,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 275,
-          top: 177,
+          top: 243,
           opacity: home ? "0.5" : "1"
         }}
       />
@@ -116,7 +139,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 162,
-          top: 34,
+          top: 104,
           opacity: share ? "0.5" : "1"
         }}
       />
@@ -125,8 +148,46 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 402,
-          top: 34,
+          top: 104,
           opacity: options ? "0.5" : "1"
+        }}
+      />
+
+      {/* Triggers */}
+      <img
+        src={L1}
+        style={{
+          position: "absolute",
+          left: 77,
+          top: 70,
+          opacity: l1 ? "0.5" : "1"
+        }}
+      />
+      <img
+        src={L2}
+        style={{
+          position: "absolute",
+          left: 79,
+          top: 0,
+          opacity: l2 ? "0.5" : "1"
+        }}
+      />
+      <img
+        src={R1}
+        style={{
+          position: "absolute",
+          left: 437,
+          top: 70,
+          opacity: r1 ? "0.5" : "1"
+        }}
+      />
+      <img
+        src={R2}
+        style={{
+          position: "absolute",
+          left: 434,
+          top: 0,
+          opacity: r2 ? "0.5" : "1"
         }}
       />
 
@@ -136,7 +197,8 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 162,
-          top: 154,
+          top: 224,
+          opacity: l3 ? "0.5" : "1",
           transform: `translate(${analogLeftHorizontal * 10}px, ${analogLeftVertical * 10}px)`
         }}
       />
@@ -145,7 +207,8 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 350,
-          top: 154,
+          top: 224,
+          opacity: r3 ? "0.5" : "1",
           transform: `translate(${analogRightHorizontal * 10}px, ${analogRightVertical * 10}px)`
         }}
       />
@@ -156,7 +219,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 92,
-          top: 59,
+          top: 129,
           opacity: up ? "0.5" : "1"
         }}
       />
@@ -165,7 +228,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 92,
-          top: 116,
+          top: 186,
           opacity: down ? "0.5" : "1"
         }}
       />
@@ -174,7 +237,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 58,
-          top: 92,
+          top: 162,
           opacity: left ? "0.5" : "1"
         }}
       />
@@ -183,7 +246,7 @@ const Dualshock4 = ({
         style={{
           position: "absolute",
           left: 115,
-          top: 92,
+          top: 162,
           opacity: right ? "0.5" : "1"
         }}
       />
