@@ -1,39 +1,24 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from "react"
+import React, { createContext, PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
 import { createJoymap, createQueryModule, Joymap, QueryModule } from "joymap"
-
-export type Gamepads = {
-  name: string
-  gamepad: QueryModule
-}
-
-interface GamepadContextInterface {
-  joymap: Joymap | null
-  gamepads: Gamepads[] | null
-}
-
-const DEFAULT_CONTEXT: GamepadContextInterface = {
-  joymap: null,
-  gamepads: null
-}
-
-
-const GamepadContext = createContext<GamepadContextInterface>(DEFAULT_CONTEXT)
+import { useGamepadStore } from "../store/store"
 
 interface Props {
   maxGamepads?: number
 }
 
 export const GamepadProvider = ({ children, maxGamepads = 4 }: PropsWithChildren<Props>) => {
-  const [joymap, setJoymap] = useState<Joymap | null>(null)
-  const [gamepads, setGamepads] = useState<Gamepads[] | null>(null)
+  // const joymap = useRef<Joymap | null>(null)
+  // const [gamepads, setGamepads] = useState<Gamepads[] | null>(null)
+  const { joymap, gamepads, setGamepads, setJoymap } = useGamepadStore();
 
   useEffect(() => {
+    // Initialize Joymap and gamepad "modules"
+    if(joymap === null) {
     const newJoymap = createJoymap({
-      onPoll() {
-        // console.log("default poll still here")
+      onPoll(...args) {
+        console.log("default poll still here", ...args)
       }
     })
-    setJoymap(newJoymap)
     console.log('[GAMEPAD] Init joymap', newJoymap)
 
     // We create "gamepads" to embody each separate gamepad
@@ -41,7 +26,7 @@ export const GamepadProvider = ({ children, maxGamepads = 4 }: PropsWithChildren
       .fill(0)
       .map((_, index) => {
         const gamepad = createQueryModule()
-        if (joymap) joymap.addModule(gamepad)
+        if (newJoymap) newJoymap.addModule(gamepad)
 
         return {
           // We add 1 to index so it starts from Gamepad1
@@ -50,26 +35,24 @@ export const GamepadProvider = ({ children, maxGamepads = 4 }: PropsWithChildren
         }
       })
 
+    setJoymap(newJoymap);
     if (newGamepads) setGamepads(newGamepads)
     console.log('[GAMEPAD] Init gamepads', newGamepads)
+    }
 
-    if (joymap) joymap.start()
+    // Run Joymap's polling
+    if (joymap !== null) joymap.start()
+    console.log('[GAMEPAD] Starting gamepads')
 
     return () => {
-      if (joymap) joymap.stop()
+      // End polling
+      console.log('[GAMEPAD] Stopping gamepads')
+      if (joymap !== null) joymap.stop()
     }
   }, [])
 
-  return (
-    <GamepadContext.Provider
-      value={{
-        joymap,
-        gamepads
-      }}
-    >
-      {children}
-    </GamepadContext.Provider>
-  )
-}
+  console.log('[GAMEPADS] Current gamepads', gamepads)
 
-export const useGamepads = () => useContext(GamepadContext)
+  return <>{children}</>
+  
+}

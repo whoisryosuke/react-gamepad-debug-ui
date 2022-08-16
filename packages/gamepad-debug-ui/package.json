@@ -12,6 +12,7 @@
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build",
+    "check": "tsc --noEmit",
     "prerelease": "yarn build",
     "release": "semantic-release"
   },
@@ -72,6 +73,7 @@
     ]
   },
   "dependencies": {
-    "joymap": "^2.2.4"
+    "joymap": "^2.2.4",
+    "zustand": "^4.0.0"
   }
 }
