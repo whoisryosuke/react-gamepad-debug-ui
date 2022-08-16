@@ -1,5 +1,4 @@
-import Gamepad from "./components/Dualshock4"
+import Gamepad from "./components/Gamepad"
+import { GamepadProvider, useGamepads } from "./context/GamepadContext"
 
-export {
-    Gamepad
-}
+export { Gamepad, useGamepads, GamepadProvider }
